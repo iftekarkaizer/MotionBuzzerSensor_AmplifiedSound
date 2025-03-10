@@ -1,0 +1,43 @@
+#include <SoftwareSerial.h> // Include the SoftwareSerial library
+
+SoftwareSerial gsm(2, 3); // Create a SoftwareSerial object for the GSM module
+//int bluelight = 12;
+
+void setup() {
+  Serial.begin(9600); // Start serial communication
+  gsm.begin(9600); // Start GSM communication
+ 
+}
+
+void loop() {
+
+  // for primary number Message and phone call
+     gsm.println("AT+CMGF=1"); 
+ delay(1000);
+gsm.println("AT+CMGS=\"+1 8255230050\""); 
+  delay(1000);
+  
+  gsm.println("Hello, Someone came in"); 
+  
+gsm.write(26); 
+  delay(25000);   
+    gsm.println("ATD+1 8255230050;") ;
+     delay (35000);
+    
+   // for secondary number message and phone call          
+
+gsm.println("AT+CMGF=1"); 
+ delay(1000);
+gsm.println("AT+CMGS=\"+1 8255230040\""); 
+  delay(1000);
+  
+  gsm.println("Hello, someone came in"); 
+  
+gsm.write(26); 
+  delay(25000);   
+    gsm.println("ATD+1 8255230040;") ;
+     delay (35000);
+    
+
+  
+}
